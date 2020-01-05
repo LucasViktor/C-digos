@@ -1,0 +1,34 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Jan  5 18:39:43 2020
+
+@author: LucasViktor
+
+"""
+import matplotlib.pyplot as plt
+#Deixamos duas listas fazias para serem preenchidas no plot
+x=[]
+y=[]
+
+#Criamos uma variável para abrir os dados dentro do python
+#Open abre o arquivo e 'r' em modo leitura (read)
+#o arquivo não precisa ser csv necessariamente!
+#mas precisa estar no mesmo diretório de onde roda o código
+#ou terá que especificar o caminho
+dataset = open('dataset.csv', 'r')
+for line in dataset: #para cada linha do conjunto de dados
+    line = line.strip() #retire \n
+    X,Y = line.split(',')#atribua o primeiro valor a X e o segundo a Y
+    x.append(X) #preencha a lista com os valores atribuitos a X
+    y.append(Y) #preencha  " Y
+    
+dataset.close() #fecha a leitura do arquivo
+
+#Plotando o gráfico
+plt.plot(x,y)
+#Nomeia as coisas no gráfico
+plt.title('Título')
+plt.xlabel('eixo x')
+plt.ylabel('eixo y')
+
+plt.show()
