@@ -1,0 +1,38 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import ExtraTreesClassifier
+
+#criando gráfico a partir de um data frame
+data = pd.read_csv('C:/Users/Calixto/Desktop/datascience/wine_dataset.csv')
+
+data.head()
+
+#dentro da coluna 'a' troque o nome do item 'b' pelo número x
+data['style'] = data['style'].replace('red', 0)
+data['style'] = data['style'].replace('white', 1)
+
+#separando variáveis preditivas e alvo
+x = data.drop('style', axis =1)
+y =data['style']
+
+#criando um conjunto de dados para  treino e teste
+#test_size =0.3 armazena 30% dos dados em cada variavel de saida
+x_treino, x_teste, y_treino, y_teste = train_test_split(x, y, test_size = 0.3)
+#Criando o modelo
+modelo = ExtraTreesClassifier()
+modelo.fit(x_treino, y_treino)
+
+#Imprimindo resultados
+resultado = modelo.score(x_teste,y_teste)
+print('Acurácia:',resultado)
+
+y_teste[403:408]
+x_teste[403:408]
+
+#prevendo os tipos de vinhos das linhas que vão de 403 até 408
+previsoes = modelo.predict(x_teste[403:408])
+
+#imprimindo as previsões, e comparando com o certo y_teste
+previsoes
